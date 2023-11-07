@@ -38,6 +38,8 @@ import (
 	_ "github.com/pingcap/go-ycsb/pkg/workload"
 	"github.com/pingcap/go-ycsb/pkg/ycsb"
 
+	// Register mydb database
+	_ "github.com/sacak32/go-ycsb/db/mydb"
 	// Register basic database
 	_ "github.com/pingcap/go-ycsb/db/basic"
 	// Register MySQL database
