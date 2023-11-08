@@ -14,4 +14,4 @@ services:
 
   # monitors
   ycsb:
-    image: pingcap/go-ycsb
+    image: sacak32/go-ycsb

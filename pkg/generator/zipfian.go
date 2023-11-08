@@ -36,7 +36,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/pingcap/go-ycsb/pkg/util"
+	"github.com/sacak32/go-ycsb/pkg/util"
 )
 
 const (

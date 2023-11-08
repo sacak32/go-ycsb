@@ -25,11 +25,11 @@ import (
 	"time"
 
 	"github.com/magiconair/properties"
-	"github.com/pingcap/go-ycsb/pkg/generator"
-	"github.com/pingcap/go-ycsb/pkg/measurement"
-	"github.com/pingcap/go-ycsb/pkg/prop"
-	"github.com/pingcap/go-ycsb/pkg/util"
-	"github.com/pingcap/go-ycsb/pkg/ycsb"
+	"github.com/sacak32/go-ycsb/pkg/generator"
+	"github.com/sacak32/go-ycsb/pkg/measurement"
+	"github.com/sacak32/go-ycsb/pkg/prop"
+	"github.com/sacak32/go-ycsb/pkg/util"
+	"github.com/sacak32/go-ycsb/pkg/ycsb"
 )
 
 type contextKey string

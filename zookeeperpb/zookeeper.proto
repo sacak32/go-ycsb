@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package zookeeperpb;
+
+option go_package = "github.com/sacak32/go-ycsb/zookeeperpb";
+
+message ACL {
+  string scheme = 1;
+  string id = 2;
+  uint32 perms = 3;
+}
+
+message Stat {
+  int64 czxid = 1;
+  int64 mzxid = 2;
+  int64 ctime = 3;
+  int64 mtime = 4;
+  int32 version = 5;
+  int32 cversion = 6;
+  int32 ephemeralOwner = 7;
+  int32 dataLength = 8;
+  int32 numChildren = 9;
+  int32 pzxid = 10;
+}
+
+message ZNode {
+  string path = 1;
+  bytes data = 2;
+  repeated ACL acl = 3;
+  Stat stat = 4;
+}
+
+message Path {
+    string path = 1;
+}
+
+message Empty {}
+
+message SetZNodeRequest {
+    string path = 1;
+    bytes data = 2;
+    int32 version = 3;
+}
+
+message GetZNodeChildrenResponse {
+    repeated string children = 1;
+}
+
+service ZooKeeper {
+  rpc CreateZNode (ZNode) returns (Path);
+  rpc DeleteZNode (Path) returns (Empty);
+  rpc ExistsZNode (Path) returns (Stat);
+  rpc GetZNode (Path) returns (ZNode);
+  rpc SetZNode (SetZNodeRequest) returns (Stat);
+  rpc GetZNodeChildren (Path) returns (GetZNodeChildrenResponse);
+}

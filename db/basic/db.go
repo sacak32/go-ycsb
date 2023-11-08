@@ -38,8 +38,8 @@ import (
 	"time"
 
 	"github.com/magiconair/properties"
-	"github.com/pingcap/go-ycsb/pkg/prop"
-	"github.com/pingcap/go-ycsb/pkg/ycsb"
+	"github.com/sacak32/go-ycsb/pkg/prop"
+	"github.com/sacak32/go-ycsb/pkg/ycsb"
 )
 
 const (

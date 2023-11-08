@@ -20,8 +20,8 @@ import (
 
 	"github.com/magiconair/properties"
 	"github.com/pingcap/errors"
-	"github.com/pingcap/go-ycsb/pkg/util"
-	"github.com/pingcap/go-ycsb/pkg/ycsb"
+	"github.com/sacak32/go-ycsb/pkg/util"
+	"github.com/sacak32/go-ycsb/pkg/ycsb"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/tikv/client-go/v2/rawkv"
 )

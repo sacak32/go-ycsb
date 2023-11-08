@@ -1,0 +1,35 @@
+order-port: 26733
+raft-port: 27238
+order-replication-factor: 3
+order-batching-interval: 1000ms
+# order-ip-address: 127.0.0.1
+order-ip-address: 192.168.64.24
+
+data-port: 23282
+data-replication-factor: 2
+data-batching-interval: 1000ms
+# data-ip-address: 127.0.0.1
+data-ip-address: 192.168.64.25
+shards: 2
+
+disc-port: 23472
+# disc-ip-address: 127.0.0.1
+disc-ip-address: 192.168.64.23
+
+zk-port: 23222
+zk-ip-address: 192.168.64.8
+zk-servers:
+  - 192.168.64.8
+  - 192.168.64.9
+  - 192.168.64.10
+zids:
+  - 0
+  - 1
+  - 2
+# zk-ip-address: 127.0.0.1
+
+zk-metadata-port: 23300
+
+metadata-trim-threshold: 5000 
+metadata-probe-frequency: 1000 # ms
+metadata-trim-frequency: 2000 # ms

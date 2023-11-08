@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   ycsb: 
-    image: pingcap/go-ycsb
+    image: sacak32/go-ycsb
     volumes:
       - ./data/sqlite:/data
     

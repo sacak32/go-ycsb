@@ -1,33 +1,3 @@
-// Copyright 2018 PingCAP, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-/**
- * Copyright (c) 2010-2016 Yahoo! Inc., 2017 YCSB contributors All rights reserved.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you
- * may not use this file except in compliance with the License. You
- * may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * permissions and limitations under the License. See accompanying
- * LICENSE file.
- */
-
 package mydb
 
 import (
@@ -37,14 +7,12 @@ import (
 	"math/rand"
 	"time"
 	"log"
-	"os"
-	"strings"
 
-	pb "github.com/scalog/scalog/zookeeper/zookeeperpb"
+	pb "github.com/sacak32/go-ycsb/zookeeperpb"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"github.com/magiconair/properties"
-	"github.com/pingcap/go-ycsb/pkg/ycsb"
+	"github.com/sacak32/go-ycsb/pkg/ycsb"
 )
 
 const (
@@ -72,8 +40,16 @@ func (db *mydb) InitThread(ctx context.Context, _ int, _ int) context.Context {
 	state := new(myState)
 	state.r = rand.New(rand.NewSource(time.Now().UnixNano()))
 	state.buf = new(bytes.Buffer)
-	state.clients := []pb.ZooKeeperClient{}
+	state.clients = []pb.ZooKeeperClient{}
 	
+	// Config
+	viper.SetConfigFile(".scalog.yaml")
+	viper.AutomaticEnv() // read in environment variables that match
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		log.Printf("Using config file: %v", viper.ConfigFileUsed())
+	}
+
 	zkNodesIp := viper.GetStringSlice("zk-servers")
 	zkPort := int32(viper.GetInt("zk-port"))
 
@@ -96,7 +72,7 @@ func (db *mydb) InitThread(ctx context.Context, _ int, _ int) context.Context {
 
 		client := pb.NewZooKeeperClient(conn)
 
-		clients = append(clients, client)
+		state.clients = append(state.clients, client)
 	}
 
 	return context.WithValue(ctx, stateKey, state)
@@ -137,12 +113,12 @@ func (db *mydb) Update(ctx context.Context, table string, key string, values map
 	state := ctx.Value(stateKey).(*myState)
 	client := state.clients[state.r.Intn(len(state.clients))]
 
-	var x int := 0
+	var x int = 0
 	var data []byte
 	for _, val := range values {
 		if x == 0 {
-			data := val
-			x := x + 1
+			data = val
+			x = x + 1
 		}
 	}
 
@@ -151,7 +127,7 @@ func (db *mydb) Update(ctx context.Context, table string, key string, values map
 		Data: data,
 	}
 
-	createResponse, err := client.CreateZNode(ctx.Background(), znode)
+	createResponse, err := client.CreateZNode(context.Background(), znode)
 	if err != nil {
 		log.Printf("CreateZNode failed: %v", err)
 	} else {
@@ -167,6 +143,28 @@ func (db *mydb) BatchUpdate(ctx context.Context, table string, keys []string, va
 
 func (db *mydb) Insert(ctx context.Context, table string, key string, values map[string][]byte) error {
 	state := ctx.Value(stateKey).(*myState)
+	client := state.clients[state.r.Intn(len(state.clients))]
+
+	var x int = 0
+	var data []byte
+	for _, val := range values {
+		if x == 0 {
+			data = val
+			x = x + 1
+		}
+	}
+
+	znode := &pb.ZNode{
+		Path: key,
+		Data: data,
+	}
+
+	createResponse, err := client.CreateZNode(context.Background(), znode)
+	if err != nil {
+		log.Printf("CreateZNode failed: %v", err)
+	} else {
+		fmt.Printf("Created ZNode: %v\n", createResponse.Path)
+	}
 
 	return nil
 }

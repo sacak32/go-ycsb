@@ -7,7 +7,7 @@ import (
 
 	"github.com/magiconair/properties"
 	"github.com/minio/minio-go"
-	"github.com/pingcap/go-ycsb/pkg/ycsb"
+	"github.com/sacak32/go-ycsb/pkg/ycsb"
 )
 
 const (
