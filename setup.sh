@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 curl -OL https://golang.org/dl/go1.21.4.linux-amd64.tar.gz
 sha256sum go1.21.4.linux-amd64.tar.gz
