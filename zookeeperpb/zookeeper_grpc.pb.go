@@ -4,7 +4,7 @@
 // - protoc             v3.21.5
 // source: zookeeper.proto
 
-package zookeeper
+package zookeeperpb
 
 import (
 	context "context"
@@ -40,7 +40,7 @@ func NewZooKeeperClient(cc grpc.ClientConnInterface) ZooKeeperClient {
 
 func (c *zooKeeperClient) CreateZNode(ctx context.Context, in *ZNode, opts ...grpc.CallOption) (*Path, error) {
 	out := new(Path)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/CreateZNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/CreateZNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (c *zooKeeperClient) CreateZNode(ctx context.Context, in *ZNode, opts ...gr
 
 func (c *zooKeeperClient) DeleteZNode(ctx context.Context, in *Path, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/DeleteZNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/DeleteZNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *zooKeeperClient) DeleteZNode(ctx context.Context, in *Path, opts ...grp
 
 func (c *zooKeeperClient) ExistsZNode(ctx context.Context, in *Path, opts ...grpc.CallOption) (*Stat, error) {
 	out := new(Stat)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/ExistsZNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/ExistsZNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func (c *zooKeeperClient) ExistsZNode(ctx context.Context, in *Path, opts ...grp
 
 func (c *zooKeeperClient) GetZNode(ctx context.Context, in *Path, opts ...grpc.CallOption) (*ZNode, error) {
 	out := new(ZNode)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/GetZNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/GetZNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (c *zooKeeperClient) GetZNode(ctx context.Context, in *Path, opts ...grpc.C
 
 func (c *zooKeeperClient) SetZNode(ctx context.Context, in *SetZNodeRequest, opts ...grpc.CallOption) (*Stat, error) {
 	out := new(Stat)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/SetZNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/SetZNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func (c *zooKeeperClient) SetZNode(ctx context.Context, in *SetZNodeRequest, opt
 
 func (c *zooKeeperClient) GetZNodeChildren(ctx context.Context, in *Path, opts ...grpc.CallOption) (*GetZNodeChildrenResponse, error) {
 	out := new(GetZNodeChildrenResponse)
-	err := c.cc.Invoke(ctx, "/zookeeper.ZooKeeper/GetZNodeChildren", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/zookeeperpb.ZooKeeper/GetZNodeChildren", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ func _ZooKeeper_CreateZNode_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/CreateZNode",
+		FullMethod: "/zookeeperpb.ZooKeeper/CreateZNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).CreateZNode(ctx, req.(*ZNode))
@@ -168,7 +168,7 @@ func _ZooKeeper_DeleteZNode_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/DeleteZNode",
+		FullMethod: "/zookeeperpb.ZooKeeper/DeleteZNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).DeleteZNode(ctx, req.(*Path))
@@ -186,7 +186,7 @@ func _ZooKeeper_ExistsZNode_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/ExistsZNode",
+		FullMethod: "/zookeeperpb.ZooKeeper/ExistsZNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).ExistsZNode(ctx, req.(*Path))
@@ -204,7 +204,7 @@ func _ZooKeeper_GetZNode_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/GetZNode",
+		FullMethod: "/zookeeperpb.ZooKeeper/GetZNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).GetZNode(ctx, req.(*Path))
@@ -222,7 +222,7 @@ func _ZooKeeper_SetZNode_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/SetZNode",
+		FullMethod: "/zookeeperpb.ZooKeeper/SetZNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).SetZNode(ctx, req.(*SetZNodeRequest))
@@ -240,7 +240,7 @@ func _ZooKeeper_GetZNodeChildren_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/zookeeper.ZooKeeper/GetZNodeChildren",
+		FullMethod: "/zookeeperpb.ZooKeeper/GetZNodeChildren",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ZooKeeperServer).GetZNodeChildren(ctx, req.(*Path))
@@ -252,7 +252,7 @@ func _ZooKeeper_GetZNodeChildren_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ZooKeeper_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "zookeeper.ZooKeeper",
+	ServiceName: "zookeeperpb.ZooKeeper",
 	HandlerType: (*ZooKeeperServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -68,7 +68,6 @@ func (db *mydb) InitThread(ctx context.Context, _ int, _ int) context.Context {
 		if err != nil {
 			log.Fatalf("Failed to connect: %v", err)
 		}
-		defer conn.Close()
 
 		client := pb.NewZooKeeperClient(conn)
 

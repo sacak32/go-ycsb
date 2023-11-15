@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package zookeeperpb;
 
-option go_package = "github.com/sacak32/go-ycsb/zookeeperpb";
+option go_package = "github.com/scalog/scalog/zookeeperpb";
 
 message ACL {
   string scheme = 1;
